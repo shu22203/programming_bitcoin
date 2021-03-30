@@ -24,27 +24,21 @@ class FieldElement(val num: Int, val prime: Int) {
 
     operator fun times(other: FieldElement): FieldElement {
         if (prime != other.prime) {
-            throw Exception("Cannot add two numbers in different Fields")
+            throw Exception("Cannot multiply two numbers in different Fields")
         }
         val ret = (num * other.num) % prime
         return FieldElement(ret, prime)
     }
 
     fun pow(exponent: Int): FieldElement {
-        var n = exponent
-        while (n < 0) {
-            n += prime - 1
-        }
+        var n = (exponent + prime - 1) % (prime - 1)
         val ret = (Math.pow(num.toDouble(), n.toDouble())) % prime
         return FieldElement(ret.toInt(), prime)
     }
 
     operator fun div(other: FieldElement): FieldElement {
-        if (other !is FieldElement) {
-            throw Exception("Type mismatched")
-        }
         if (prime != other.prime) {
-            throw Exception("Cannot add two numbers in different Fields")
+            throw Exception("Cannot devide two numbers in different Fields")
         }
         return this * other.pow(prime - 2)
     }
