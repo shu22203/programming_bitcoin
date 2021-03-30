@@ -14,10 +14,7 @@ class FieldElement(val num: Int, val prime: Int) {
         return num == other.num && prime == other.prime
     }
 
-    operator fun plus(other: Any?): FieldElement {
-        if (other !is FieldElement) {
-            throw Exception("Type mismatched")
-        }
+    operator fun plus(other: FieldElement): FieldElement {
         if (prime != other.prime) {
             throw Exception("Cannot add two numbers in different Fields")
         }
@@ -25,10 +22,7 @@ class FieldElement(val num: Int, val prime: Int) {
         return FieldElement(ret, prime)
     }
 
-    operator fun times(other: Any?): FieldElement {
-        if (other !is FieldElement) {
-            throw Exception("Type mismatched")
-        }
+    operator fun times(other: FieldElement): FieldElement {
         if (prime != other.prime) {
             throw Exception("Cannot add two numbers in different Fields")
         }
@@ -45,7 +39,7 @@ class FieldElement(val num: Int, val prime: Int) {
         return FieldElement(ret.toInt(), prime)
     }
 
-    operator fun div(other: Any?): FieldElement {
+    operator fun div(other: FieldElement): FieldElement {
         if (other !is FieldElement) {
             throw Exception("Type mismatched")
         }
